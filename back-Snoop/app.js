@@ -47,7 +47,7 @@ app.put("/editJogos", async(req, res) => {
     editedGame.price = req.body.price
     editedGame.image = req.body.image
 
-    editedGame.save();
+    await editedGame.save();
     
     res.json(editedGame);
 });
@@ -56,14 +56,9 @@ app.delete("/deleteGame", async(req, res) => {
     const deletedGame = await Jogo.findOne({
         where: { id:req.body.id }
     });
-    deletedGame.game_name = req.body.game_name
-    deletedGame.discount = req.body.discount
-    deletedGame.price = req.body.price
-    deletedGame.image = req.body.image
-
-    destroy();
+    await deletedGame.destroy();
     res.json(deletedGame);
-})
+});
 
 app.get("/listJogos", async (req, res) => {
     res.json(await Jogo.findAll());

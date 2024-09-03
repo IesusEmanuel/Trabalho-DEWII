@@ -78,7 +78,6 @@ const Add = () => {
           return res.json();
         })
         .then((json) => {
-          //loadGame();
           location.reload();
         })
 
