@@ -1,0 +1,13 @@
+.paginas-container {
+  margin: 1rem auto;
+  gap: 1rem;
+  span {
+    padding: .6rem 1.2rem;
+    background: #202020;
+    border-radius: 50%;
+    border: solid 1px transparent;
+  }span:hover {
+    background: transparent;
+    border: solid 1px #202020;
+    color: #202020;
+  }}

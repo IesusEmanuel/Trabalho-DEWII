@@ -1,0 +1,45 @@
+.game-container {
+   width: 20rem;
+   margin: .4rem 1rem;
+   background: black;
+   border-radius: 2rem;
+   transition: all 400ms ease;
+}.game-container:hover {
+  box-shadow: 10px 2px 32px rgba(0, 0, 0, 1);
+}.game-image {
+  margin: 0;
+  width: 20rem;
+  height: auto;
+  img {
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    width: 100%;
+    aspect-ratio: 1/1;
+  }}
+.game-name {
+  margin-top: 1rem;
+}
+.platforms {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .1rem;
+}.platform-existing {
+  width: 2.4rem;
+  height: auto;
+  object-fit: contain;
+  aspect-ratio: 1/1;
+}.discounts-and-price {
+  gap: 1.3rem;
+  margin: 1rem;
+  .discount {
+    padding: 1rem;
+    border-radius: .3rem;
+    background: #f45252;
+  }.price {
+    padding: 1rem;
+    border-radius: .5rem;
+    background:#404040;
+  }
+}

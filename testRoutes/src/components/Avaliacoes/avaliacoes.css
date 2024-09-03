@@ -1,0 +1,39 @@
+.text-start {
+  gap: .1rem;
+}.allAval {
+  width:100%;
+  justify-content: center;
+  padding: 2rem 0;
+  align-items: center;
+  gap: 2rem;
+}.aval {
+  padding: 1rem;
+  background: #202020;
+  border-radius: 1rem;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+}.uis-star, .uil-star {
+  color: #e49c01;
+}.desc {
+  margin-top: 1.1rem;
+  line-height: 36px;
+  width: 60%;
+  text-align: justify;
+}.buttons-container {
+  margin-top: 1rem;
+  gap: 1.8rem;
+}.button-util {
+  gap: .6rem;
+  border: solid 1px white;
+  background: transparent;
+  padding: .8rem;
+  border-radius: .7rem;
+}.uil-thumbs-up {
+  color: white;
+}.button-util:hover {
+  color: #202020;
+  background: white;
+}.button-util:hover .uil-thumbs-up {
+  color: #202020;
+}

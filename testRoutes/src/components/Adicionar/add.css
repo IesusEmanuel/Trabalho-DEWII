@@ -1,0 +1,32 @@
+form {
+  z-index: 997;
+  top: 10%;
+  margin: 0 auto;
+  right: 43%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  background: #202020;
+  color: white;
+  padding: 3rem;
+  font-family: 'Poppins', sans-serif;
+  input[placeholder] {
+    font-family: 'Poppins', sans-serif;
+    padding-left: 3px;
+  }
+  button {
+    font-family: 'Poppins', sans-serif;
+    height: 2.2rem;
+    border: solid 1px white;
+    background: transparent;
+    color: white;
+  }button:hover {
+    background: white;
+    color: black;
+  }
+}.games-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0;
+}

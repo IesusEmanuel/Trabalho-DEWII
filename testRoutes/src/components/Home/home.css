@@ -1,0 +1,31 @@
+.main-section {
+  display: flex;
+  height: 100vh;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+  flex-direction: column;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0,0,0,0.8)), url('https://getwallpapers.com/wallpaper/full/7/7/5/33626.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  .slogan {
+    margin: 10% 2%;
+    width: 60%;
+  }.buttons-container-main-section {
+    width: 60%;
+    margin-top: -7%;
+    margin-left: 2%;
+    gap: 2rem;
+    justify-content: left;
+    button {
+      width: 15rem;
+      height: 3rem;
+      border: solid 1px white;
+      background: transparent;
+    }button:hover {
+      background: white;
+      color: black;
+    }
+  }
+}
