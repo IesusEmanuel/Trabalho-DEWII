@@ -23,7 +23,7 @@ const Add = () => {
           return res.json();
         })
         .then((json) => {
-          window.alert('teste');
+          window.alert('Jogo Adicionado');
           loadGame();
         })
 
@@ -78,7 +78,8 @@ const Add = () => {
           return res.json();
         })
         .then((json) => {
-          location.reload();
+          window.alert('Jogo Editado');
+                    location.reload();
         })
 
       //setJogos([...jogos, newGame]);
@@ -91,7 +92,26 @@ const Add = () => {
     }
   }
 
-  // [] pra executar uma única vez  no inicio
+  const deleteGame = async () => {
+    try {
+      const response = {req:body.id};
+      const options = {method: 'DELETE',
+        body: new URLSearchParams(response)
+      };
+
+      fetch(`http://127.0.0.1:3000/deleteJogos/${id}`, options);
+      if (!response.ok) {
+        throw new Error('Erro ao excluir o jogo');
+      }
+      
+      // Mensagem de sucesso
+      alert('Jogo excluído com sucesso');
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro ao excluir o jogo');
+    }
+  }
+
   return (
     <>
       <form ref={form1} onSubmit={editOrnew}>
@@ -129,7 +149,7 @@ const Add = () => {
 
       <div className="games-container align-container-center">
         {jogos.map((jogo, index) => (
-          <Jogo key={index} id={jogo.id} game_name={jogo.game_name} price={jogo.price} discount={jogo.discount} image={jogo.image} selectEdit={ selectEdit }/>
+          <Jogo key={index} id={jogo.id} game_name={jogo.game_name} price={jogo.price} discount={jogo.discount} image={jogo.image} deleteGame={ deleteGame } selectEdit={ selectEdit }/>
         ))}
       </div>
     </>

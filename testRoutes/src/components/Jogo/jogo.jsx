@@ -3,7 +3,7 @@ import "/src/App.css";
 import "./jogo.css";
 // import Comprando from "/src/components/Comprando/comprando.jsx";
 
-const Jogo = ({ id, game_name, image, discount, price, selectEdit }) => {
+const Jogo = ({ id, game_name, image, discount, price, selectEdit, deleteGame}) => {
   // const comprandoAux = () => {
   //   Comprando(game_name);
   // }
@@ -26,7 +26,7 @@ const Jogo = ({ id, game_name, image, discount, price, selectEdit }) => {
         <div className="flex-column actions">
           <span className="poppins nome-delete-edit">{ game_name }</span>
           <button className="pointer transition edit-btn" onClick={() => { selectEdit(id, game_name, discount, price, image)} }>Editar</button>
-          <button className="pointer transition delete-btn">Excluir</button>
+          <button className="pointer transition delete-btn"  onClick={() => { deleteGame(Jogo.id)}}>Excluir</button>
         </div>
       </div>
   )

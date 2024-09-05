@@ -52,12 +52,28 @@ app.put("/editJogos", async(req, res) => {
     res.json(editedGame);
 });
 
-app.delete("/deleteGame", async(req, res) => {
-    const deletedGame = await Jogo.findOne({
-        where: { id:req.body.id }
-    });
-    await deletedGame.destroy();
-    res.json(deletedGame);
+// app.delete("/deleteGame", async(req, res) => {
+//     const deletedGame = await Jogo.findOne({
+//         where: { id:req.body.id }
+//     });
+//     await deletedGame.destroy();
+//     res.json(deletedGame);
+// });
+
+app.delete("/deleteJogos", async(req, res)=> {
+// const { id } = req.params;
+  try {
+    const excludedGame = await Jogo.findOne({ where: { id:req.body.id } });
+
+    if (!excludedGame) {
+      return res.status(404).json({ message: 'Jogo não encontrado' });
+    }
+    await excludedGame.destroy();
+    
+    res.json({ message: 'Jogo excluído com sucesso', excludedGame });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao excluir o jogo', error });
+  }
 });
 
 app.get("/listJogos", async (req, res) => {
