@@ -75,6 +75,9 @@
   }.poppins-600 {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
+}.poppins-300 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
 }.margin {
   margin: 2.3rem 0;
   }.free {

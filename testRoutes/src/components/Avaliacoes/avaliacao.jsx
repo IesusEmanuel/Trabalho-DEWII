@@ -10,12 +10,13 @@ import "./avaliacoes.css";
 //   return <div>{estrelasArray}</div>;
 // };
 
-const Avaliacao = ({ name, desc, count, stars}) => {
+const Avaliacao = ({ name, desc, count, stars, game}) => {
   return (
     <>
     
     <div className="flex-column aval">
       <span className="nome white poppins">{ name }</span>
+      <span className="game muted poppins-300">Sobre { game }</span>
       <div className="flex-row stars">
         {stars >= 1 && <i className="uis uis-star"></i> }
         {stars >= 2 && <i className="uis uis-star"></i>}
