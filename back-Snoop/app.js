@@ -38,6 +38,10 @@ app.post("/newJogos", async(req, res) => {
     res.json(created);
 })
 
+app.post("/newUser", async(req, res) => {
+    console.log(req.body);
+})
+
 app.put("/editJogos", async(req, res) => {
     const editedGame = await Jogo.findOne({
         where: { id:req.body.id }
