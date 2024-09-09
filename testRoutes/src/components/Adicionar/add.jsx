@@ -10,6 +10,7 @@ const Add = () => {
   const [price, setPrice] = useState('');
   const [jogos, setJogos] = useState([]);
   const [id, setId] = useState(null);
+
   const form1 = useRef(null);
 
   const addGame = () => {
@@ -52,9 +53,9 @@ const Add = () => {
 
   const editOrnew = (event) => {
     event.preventDefault();
-    if(id == null){
+    if (id == null) {
       addGame();
-    }else {
+    } else {
       editGame();
     }
   }
@@ -63,8 +64,8 @@ const Add = () => {
     setId(id);
     setGame_name(game_name);
     setImage(image);
-    setDiscount(discount+'');
-    setPrice(price+'');
+    setDiscount(discount + '');
+    setPrice(price + '');
   }
 
   const editGame = () => {
@@ -79,7 +80,8 @@ const Add = () => {
         })
         .then((json) => {
           window.alert('Jogo Editado');
-                    location.reload();
+          // location.reload();
+          loadGame();
         })
 
       //setJogos([...jogos, newGame]);
@@ -92,24 +94,23 @@ const Add = () => {
     }
   }
 
-  const deleteGame = async () => {
-    try {
-      const response = {req:body.id};
-      const options = {method: 'DELETE',
-        body: new URLSearchParams(response)
-      };
+  const deleteGame = async (id) => {
+    const options = {
+      method: 'DELETE',
+      body: new URLSearchParams({ id: id })
+    };
 
-      fetch(`http://127.0.0.1:3000/deleteJogos/${id}`, options);
-      if (!response.ok) {
-        throw new Error('Erro ao excluir o jogo');
-      }
-      
-      // Mensagem de sucesso
-      alert('Jogo excluído com sucesso');
-    } catch (error) {
-      console.error('Erro:', error);
-      alert('Erro ao excluir o jogo');
-    }
+    fetch(`http://127.0.0.1:3000/deleteJogos`, options)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Erro ao excluir o jogo');
+        }
+        return (res.json());
+      })
+      .then((json) => {
+        alert(json.message);
+        loadGame();
+      })
   }
 
   return (
@@ -149,7 +150,7 @@ const Add = () => {
 
       <div className="games-container align-container-center">
         {jogos.map((jogo, index) => (
-          <Jogo key={index} id={jogo.id} game_name={jogo.game_name} price={jogo.price} discount={jogo.discount} image={jogo.image} deleteGame={ deleteGame } selectEdit={ selectEdit }/>
+          <Jogo key={index} id={jogo.id} game_name={jogo.game_name} price={jogo.price} discount={jogo.discount} image={jogo.image} deleteGame={deleteGame} selectEdit={selectEdit} />
         ))}
       </div>
     </>

@@ -40,6 +40,12 @@ app.post("/newJogos", async(req, res) => {
 
 app.post("/newUser", async(req, res) => {
     console.log(req.body);
+    const created = await User.create({
+        email: req.body.name_user,
+        //uso de bcrypt para criptografar
+        senha: req.body.password_user
+    });
+    res.json(created);
 })
 
 app.put("/editJogos", async(req, res) => {
