@@ -1,12 +1,11 @@
 import express from "express";
-//import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import cors from "cors";
-// import CSS from 'connect-session-sequelize';
-//import sequelize from "./database/mysql.mjs";
 import User from "./models/user.mjs";
 import Jogo from "./models/jogo.mjs";
 
 const app = express ()
+
 
 app.use(cors({
     origin: [
@@ -40,13 +39,37 @@ app.post("/newJogos", async(req, res) => {
 
 app.post("/newUser", async(req, res) => {
     console.log(req.body);
+    const saltRounds = 10;
+
+    const hash = bcrypt.hashSync(req.body.password_user, saltRounds);
     const created = await User.create({
         email: req.body.name_user,
-        //uso de bcrypt para criptografar
-        senha: req.body.password_user
+        senha: hash
     });
     res.json(created);
 })
+
+// app.post("/loginUser", async(req, res) => {
+//     const { name_user, password_user } = req.body;
+    
+//     // Verifique se o email e a senha são fornecidos
+//     if (!name_user || !password_user) {
+//         return res.status(400).json({ logged: false, message: 'Email e senha são obrigatórios' });
+//     }
+
+//     // Encontre o usuário e verifique a senha
+//     const user = await User.findOne({ where: { name_user } });
+
+//     if (user && await bcrypt.compare(password_user, user.password_user)) {
+//         // Sucesso
+//         req.session.userId = user.id; // Armazene a sessão se necessário
+//         res.json({ logged: true });
+//     } else {
+//         // Falha
+//         res.json({ logged: false });
+//     }
+// })
+
 
 app.put("/editJogos", async(req, res) => {
     const editedGame = await Jogo.findOne({

@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 import Home from "/src/components/Home/home.jsx";
 import Sellers from "/src/components/Sellers/sellers.jsx";
@@ -27,20 +27,55 @@ export default function App() {
   const [name_user, setName_user] = useState('');
   const [password_user, setPassword_user] = useState('');
 
-  const iptname = useRef(null);
-  const iptsenha = useRef(null);
+  
+  // function realizaLogin() {
+//     const form = document.forms[0];
+//     const data = new FormData(form);
 
+//     // Converter FormData para URLSearchParams
+//     const params = new URLSearchParams();
+//     for (const pair of data.entries()) {
+//         params.append(pair[0], pair[1]);
+//     }
+
+//     const options = {
+//         method: 'POST',
+//         credentials: 'include', // Inclui cookies com a requisição, necessário para sessões
+//         body: params
+//     };
+
+//     fetch("http://127.0.0.1:3000/loginUser", options)
+//         .then((res) => {
+//             if (!res.ok) {
+//                 throw new Error(`HTTP error! status: ${res.status}`);
+//             }
+//             return res.json();
+//         })
+//         .then((json) => {
+//             if (json.logged) {
+//                 console.log('Autenticado');
+//                 window.alert('Autenticado.');
+//                 window.location.reload(); // Corrigido para recarregar a página
+//             } else {
+//                 window.alert('Falha ao executar login.');
+//             }
+//         })
+//         .catch((error) => {
+//             console.error('Erro na requisição:', error);
+//             window.alert('Erro ao tentar fazer login.');
+//         });
+// }
+
+  const realizaLogin = () => {
+    alert('logando');
+  }
   const addUser = (event) => {
     event.preventDefault();
-    alert(iptname.current.value);
     if(name_user.trim() && password_user.trim()) {
-      const newUser = { name_user, password_user};
-      const options = { method: 'post', body: new URLSearchParams(newUser)};
-  
-      alert(options);
+      const newUser = { name_user , password_user};
+      const options = { method: 'POST', body: new URLSearchParams(newUser)};
       fetch("http://127.0.0.1:3000/newUser", options)
       .then((res) => {
-        alert('caso 1');
         return res.json();
       })
       .then((json) => {
@@ -68,20 +103,20 @@ export default function App() {
       </header>
 
       <div className="blur-background"></div>
-      <form class="gone loginScreen flex-column" onSubmit={ addUser }>
+      <form class="gone loginScreen flex-column">
         <i onClick={ hideModal } class="pointer absolute close white size-2 uil uil-multiply"></i>
+
         <label className="mont-500 white" for="email">Email: </label>
-        <input type="email" ref={ iptname } />
-        {/* <input type="email" value={name_user} onChange={(t) => setName_user(t.value)}/> */}
+        <input type="email" value={ name_user } onChange={(e) => setName_user(e.target.value)} />
+
         <label className="mont-500 white" for="senha">Senha: </label>
-        <input type="password" ref={ iptsenha } />
-        {/* <input type="text" value={password_user} onChange={(t) => setPassword_user(t.value)}/> */}
+        <input type="password" value={ password_user } onChange={(e) => setPassword_user(e.target.value)}  />        
         <div className="allowedConnected">
           <input type="checkbox"></input>
           <span className="mont-300 white">Permanecer Conectado</span>
         </div>
-        <button className="transition pointer send">Login</button>
-        <button className="transition pointer send">Registrar</button>
+        <button onClick= { realizaLogin } className="transition pointer send">Login</button>
+        <button onClick={ addUser } className="transition pointer send">Registrar</button>
       </form>
 
       <Routes>
