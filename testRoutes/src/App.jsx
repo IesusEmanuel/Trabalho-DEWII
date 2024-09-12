@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from "react";
+import axios from "axios";
 import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +12,11 @@ import Todos from "/src/components/Todos/todos.jsx";
 import Footer from "/src/components/Footer/footer.jsx";
 
 const insertUser = () => {
+  const screen = document.querySelector(".loginScreen");
+  const all = document.querySelector(".blur-background");
+  screen.style.display = "none";
+  all.style.display = "none";
+
   toast.success("Usuário cadastrado com sucesso");
 }
 
@@ -72,8 +78,9 @@ export default function App() {
 // }
 
   const realizaLogin = () => {
-    alert('logando');
-  }
+    toast.success("Usuário logado");
+    }
+
   const addUser = (event) => {
     event.preventDefault();
     if(name_user.trim() && password_user.trim()) {
@@ -86,8 +93,34 @@ export default function App() {
       .then((json) => {
         insertUser();
       })
+    }else {
+      toast.warning("Erro ao criar usuário");
     }
   }
+  
+  // const LoginForm = () => {
+  //   const [username, setUsername] = useState('');
+  //   const [password, setPassword] = useState('');
+
+  //   const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  
+  //     try {
+  //       const response = await axios.post('http://localhost:5000/login', {
+  //         username,
+  //         password
+  //       });
+  
+  //       if (response.data.success) {
+  //         toast.success('certinho');
+  //       } else {
+  //         toast.info('usuario ou senha invalidos');
+  //       }
+  //     } catch (error) {
+  //       toast.warning('erro ao logar');
+  //     }
+  //   };
+  // }
 
   return (
     <Router>
@@ -105,6 +138,8 @@ export default function App() {
           <Link className="link poppins" to="/todos">Todos</Link>
           <button onClick= { showModal } className="btn-header-common align-container-center white uppercase poppins-600 flex-row pointer transition">
           Acessar <i class="uil uil-signin"></i> </button>
+          <button className="gone btn-header-commom align-conainer-center add">+</button>
+          <span className="gone uppercase poppins-600 white user">user</span>
         </nav>
       </header>
 
@@ -113,10 +148,10 @@ export default function App() {
         <i onClick={ hideModal } class="pointer absolute close white size-2 uil uil-multiply"></i>
 
         <label className="mont-500 white" for="email">Email: </label>
-        <input type="email" value={ name_user } onChange={(e) => setName_user(e.target.value)} />
+        <input type="email" value={ name_user } onChange={(e) => setName_user(e.target.value)} required />
 
         <label className="mont-500 white" for="senha">Senha: </label>
-        <input type="password" value={ password_user } onChange={(e) => setPassword_user(e.target.value)}  />        
+        <input type="password" value={ password_user } onChange={(e) => setPassword_user(e.target.value)} required />        
         <div className="allowedConnected">
           <input type="checkbox"></input>
           <span className="mont-300 white">Permanecer Conectado</span>

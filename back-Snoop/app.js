@@ -17,15 +17,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded());
 
-// app.post("/newJogos", async(req, res) => {
-//     const hash = bcrypt.hashSync(req.body.senha, saltRounds);
-//     const created = await User.create({
-//         email: req.body.email,
-//         senha: hash
-//     });
-//     res.json({ "email": created.email });
-// })
-
 app.post("/newJogos", async(req, res) => {
     console.log(req.body);
     const created = await Jogo.create({

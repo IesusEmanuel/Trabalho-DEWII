@@ -48,6 +48,8 @@ const Add = () => {
       setImage('');
       setDiscount('');
       setPrice('');
+    }else {
+      toast.warning("Erro ao cadastrar novo jogo");
     }
   }
 
