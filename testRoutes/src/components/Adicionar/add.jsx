@@ -1,7 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import "/src/App.css";
 import "./add.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Jogo from "/src/components/Jogo/jogo.jsx";
+
+const insertGame = () => {
+  toast.success("Jogo Adicionado com sucesso");
+}
+
+const editarGame = () => {
+  toast.success("Jogo editado com sucesso");
+}
+
+const excludeGame = () => {
+  toast.success("Jogo excluído com sucesso");
+}
 
 const Add = () => {
   const [game_name, setGame_name] = useState('');
@@ -24,7 +38,7 @@ const Add = () => {
           return res.json();
         })
         .then((json) => {
-          window.alert('Jogo Adicionado');
+          insertGame();
           loadGame();
         })
 
@@ -79,7 +93,7 @@ const Add = () => {
           return res.json();
         })
         .then((json) => {
-          window.alert('Jogo Editado');
+          editarGame();
           // location.reload();
           loadGame();
         })
@@ -108,13 +122,15 @@ const Add = () => {
         return (res.json());
       })
       .then((json) => {
-        alert(json.message);
+        excludeGame();
+        //alert(json.message);
         loadGame();
       })
   }
 
   return (
     <>
+    <ToastContainer />
       <form ref={form1} onSubmit={editOrnew}>
         <h1 className="center white poppins">Adicionar</h1>
         <input

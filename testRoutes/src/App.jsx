@@ -1,6 +1,8 @@
 import './App.css';
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from "/src/components/Home/home.jsx";
 import Sellers from "/src/components/Sellers/sellers.jsx";
 import Ofertas from "/src/components/Ofertas/ofertas.jsx";
@@ -8,6 +10,9 @@ import Avaliacoes from "/src/components/Avaliacoes/avaliacoes.jsx";
 import Todos from "/src/components/Todos/todos.jsx";
 import Footer from "/src/components/Footer/footer.jsx";
 
+const insertUser = () => {
+  toast.success("Usuário cadastrado com sucesso");
+}
 
 const showModal = () => {
   const screen = document.querySelector(".loginScreen");
@@ -79,13 +84,14 @@ export default function App() {
         return res.json();
       })
       .then((json) => {
-        window.alert('Usuário Cadastrado');
+        insertUser();
       })
     }
   }
 
   return (
     <Router>
+     <ToastContainer />
       <header className="header">
         <Link className="link poppins" to="/"><div className="pointer container-logo flex-row">
           <img src="/src/assets/snoop-logo.svg"></img>
