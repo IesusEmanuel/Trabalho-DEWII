@@ -130,8 +130,11 @@ const Add = () => {
       })
   }
 
+  
   return (
+    
     <>
+    
     <ToastContainer />
       <form ref={form1} onSubmit={editOrnew}>
         <h1 className="center white poppins">Adicionar</h1>
