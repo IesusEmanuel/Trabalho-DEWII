@@ -38,48 +38,10 @@ export default function App() {
   const [name_user, setName_user] = useState('');
   const [password_user, setPassword_user] = useState('');
 
-  
-  // function realizaLogin() {
-//     const form = document.forms[0];
-//     const data = new FormData(form);
-
-//     // Converter FormData para URLSearchParams
-//     const params = new URLSearchParams();
-//     for (const pair of data.entries()) {
-//         params.append(pair[0], pair[1]);
-//     }
-
-//     const options = {
-//         method: 'POST',
-//         credentials: 'include', // Inclui cookies com a requisição, necessário para sessões
-//         body: params
-//     };
-
-//     fetch("http://127.0.0.1:3000/loginUser", options)
-//         .then((res) => {
-//             if (!res.ok) {
-//                 throw new Error(`HTTP error! status: ${res.status}`);
-//             }
-//             return res.json();
-//         })
-//         .then((json) => {
-//             if (json.logged) {
-//                 console.log('Autenticado');
-//                 window.alert('Autenticado.');
-//                 window.location.reload(); // Corrigido para recarregar a página
-//             } else {
-//                 window.alert('Falha ao executar login.');
-//             }
-//         })
-//         .catch((error) => {
-//             console.error('Erro na requisição:', error);
-//             window.alert('Erro ao tentar fazer login.');
-//         });
-// }
-
-  const realizaLogin = () => {
-    toast.success("Usuário logado");
-    }
+const realizaLogin = async (event) => {
+  event.preventDefault();
+  toast.warning("Tentando Login");
+}
 
   const addUser = (event) => {
     event.preventDefault();
@@ -97,30 +59,6 @@ export default function App() {
       toast.warning("Erro ao criar usuário");
     }
   }
-  
-  // const LoginForm = () => {
-  //   const [username, setUsername] = useState('');
-  //   const [password, setPassword] = useState('');
-
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  
-  //     try {
-  //       const response = await axios.post('http://localhost:5000/login', {
-  //         username,
-  //         password
-  //       });
-  
-  //       if (response.data.success) {
-  //         toast.success('certinho');
-  //       } else {
-  //         toast.info('usuario ou senha invalidos');
-  //       }
-  //     } catch (error) {
-  //       toast.warning('erro ao logar');
-  //     }
-  //   };
-  // }
 
   return (
     <Router>

@@ -61,6 +61,23 @@ app.post("/newUser", async(req, res) => {
 //     }
 // })
 
+app.post("/loginUser", async(req, res) => {
+    const { name_user, password_user } = req.body;
+
+    try {
+        const user = await User.findOne({ where: { username: name_user } });
+
+        if (!user || !(await user.validatePassword(password_user))) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        console.log('Login bem-sucedido para o usuário:', name_user);
+        res.json({ message: 'Login successful' });
+    } catch (err) {
+        console.error('Erro no servidor:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 app.put("/editJogos", async(req, res) => {
     const editedGame = await Jogo.findOne({
