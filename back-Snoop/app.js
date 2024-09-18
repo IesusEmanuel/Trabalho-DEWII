@@ -21,6 +21,7 @@ app.post("/newJogos", async(req, res) => {
     console.log(req.body);
     const created = await Jogo.create({
         game_name: req.body.game_name,
+        company: req.body.company,
         discount: req.body.discount,
         price: req.body.price,
         image: req.body.image
@@ -84,6 +85,7 @@ app.put("/editJogos", async(req, res) => {
         where: { id:req.body.id }
     })
     editedGame.game_name = req.body.game_name
+    editedGame.company = req.body.game_name
     editedGame.discount = req.body.discount
     editedGame.price = req.body.price
     editedGame.image = req.body.image

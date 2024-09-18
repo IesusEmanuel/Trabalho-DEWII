@@ -22,15 +22,16 @@ const Add = () => {
   const [image, setImage] = useState('');
   const [discount, setDiscount] = useState('');
   const [price, setPrice] = useState('');
+  const [company, setCompany] = useState('');
   const [jogos, setJogos] = useState([]);
   const [id, setId] = useState(null);
 
   const form1 = useRef(null);
 
   const addGame = () => {
-    if (game_name.trim() && image.trim() && discount.trim() && price.trim()) {
+    if (game_name.trim() && image.trim() && discount.trim() && price.trim() && company.trim()) {
 
-      const newGame = { game_name, image, discount, price };
+      const newGame = { game_name, image, discount, price, company };
       const options = { method: 'post', body: new URLSearchParams(newGame) };
 
       fetch("http://127.0.0.1:3000/newJogos", options)
@@ -47,6 +48,7 @@ const Add = () => {
       setGame_name('');
       setImage('');
       setDiscount('');
+      setCompany('');
       setPrice('');
     }else {
       toast.warning("Erro ao cadastrar novo jogo");
@@ -76,18 +78,19 @@ const Add = () => {
     }
   }
 
-  const selectEdit = (id, game_name, discount, price, image) => {
+  const selectEdit = (id, game_name, company, discount, price, image) => {
     setId(id);
     setGame_name(game_name);
+    setCompany(company);
     setImage(image);
     setDiscount(discount + '');
     setPrice(price + '');
   }
 
   const editGame = () => {
-    if (game_name.trim() && image.trim() && discount.trim() && price.trim()) {
+    if (game_name.trim() && image.trim() && discount.trim() && price.trim() && company.trim()) {
 
-      const editGame = { id, game_name, image, discount, price };
+      const editGame = { id, game_name, image, discount, price, company };
       const options = { method: 'put', body: new URLSearchParams(editGame) };
 
       fetch("http://127.0.0.1:3000/editJogos", options)
@@ -104,6 +107,7 @@ const Add = () => {
 
       setGame_name('');
       setImage('');
+      setCompany('');
       setDiscount('');
       setPrice('');
       setId(null);
@@ -147,6 +151,13 @@ const Add = () => {
         />
         <input
           type="text"
+          placeholder="Empresa"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          required
+        />
+        <input
+          type="text"
           placeholder="Preço"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
@@ -171,7 +182,7 @@ const Add = () => {
 
       <div className="games-container align-container-center">
         {jogos.map((jogo, index) => (
-          <Jogo key={index} id={jogo.id} game_name={jogo.game_name} price={jogo.price} discount={jogo.discount} image={jogo.image} deleteGame={deleteGame} selectEdit={selectEdit} />
+          <Jogo key={index} id={jogo.id} game_name={jogo.game_name} price={jogo.price} discount={jogo.discount} image={jogo.image} company={jogo.company} deleteGame={deleteGame} selectEdit={selectEdit} />
         ))}
       </div>
     </>
