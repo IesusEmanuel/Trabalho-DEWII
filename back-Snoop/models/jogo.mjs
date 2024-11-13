@@ -3,6 +3,7 @@ import { DataTypes } from "sequelize";
 
 const Jogo = sequelize.define('Jogo', {
     game_name: DataTypes.STRING,
+    company: DataTypes.STRING,
     discount: DataTypes.FLOAT,
     price: DataTypes.FLOAT,
     image: DataTypes.STRING

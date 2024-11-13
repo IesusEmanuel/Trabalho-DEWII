@@ -57,6 +57,7 @@ body {
   text-transform: uppercase;
 }
 
+<<<<<<< HEAD
 .center {
   text-align: center;
 }
@@ -66,6 +67,43 @@ body {
 }
 
 .flex-row {
+=======
+.loginScreen {
+  width: 25rem;
+  gap: .4rem;
+  position: absolute;
+  padding: 3rem;
+  background: #202020;
+  border-radius: 2rem;
+  transform: translateY(22vh);
+  margin-left: 37vw;
+  z-index: 999;
+  input {
+    height: 2.3rem;
+    padding-left: 1rem;
+    border-radius: .5rem;
+    background: none;
+    color: #ffff;
+    border: solid 1px white;
+    caret-color: #c0c0c0;
+  }
+  button {
+    margin-top: 1rem;
+    background: #4040c4;
+    color: white;
+    border: none;
+    height: 3rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+  }button:hover {
+    color: #4040c4;
+    background: white;
+  }
+}.close {
+  top: 20px;
+  right: 20px;
+}.allowedConnected {
+>>>>>>> 384a5a0bd6622ebea636a6694f2effebb13f9535
   display: flex;
   flex-direction: row;
 }

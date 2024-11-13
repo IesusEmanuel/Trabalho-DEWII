@@ -1,21 +1,37 @@
 import React, { useEffect, useRef, useState } from "react";
 import "/src/App.css";
 import "./add.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Jogo from "/src/components/Jogo/jogo.jsx";
+
+const insertGame = () => {
+  toast.success("Jogo Adicionado com sucesso");
+}
+
+const editarGame = () => {
+  toast.success("Jogo editado com sucesso");
+}
+
+const excludeGame = () => {
+  toast.success("Jogo excluído com sucesso");
+}
 
 const Add = () => {
   const [game_name, setGame_name] = useState('');
   const [image, setImage] = useState('');
   const [discount, setDiscount] = useState('');
   const [price, setPrice] = useState('');
+  const [company, setCompany] = useState('');
   const [jogos, setJogos] = useState([]);
   const [id, setId] = useState(null);
+
   const form1 = useRef(null);
 
   const addGame = () => {
-    if (game_name.trim() && image.trim() && discount.trim() && price.trim()) {
+    if (game_name.trim() && image.trim() && discount.trim() && price.trim() && company.trim()) {
 
-      const newGame = { game_name, image, discount, price };
+      const newGame = { game_name, image, discount, price, company };
       const options = { method: 'post', body: new URLSearchParams(newGame) };
 
       fetch("http://127.0.0.1:3000/newJogos", options)
@@ -23,7 +39,7 @@ const Add = () => {
           return res.json();
         })
         .then((json) => {
-          window.alert('Jogo Adicionado');
+          insertGame();
           loadGame();
         })
 
@@ -32,7 +48,10 @@ const Add = () => {
       setGame_name('');
       setImage('');
       setDiscount('');
+      setCompany('');
       setPrice('');
+    }else {
+      toast.warning("Erro ao cadastrar novo jogo");
     }
   }
 
@@ -52,25 +71,26 @@ const Add = () => {
 
   const editOrnew = (event) => {
     event.preventDefault();
-    if(id == null){
+    if (id == null) {
       addGame();
-    }else {
+    } else {
       editGame();
     }
   }
 
-  const selectEdit = (id, game_name, discount, price, image) => {
+  const selectEdit = (id, game_name, company, discount, price, image) => {
     setId(id);
     setGame_name(game_name);
+    setCompany(company);
     setImage(image);
-    setDiscount(discount+'');
-    setPrice(price+'');
+    setDiscount(discount + '');
+    setPrice(price + '');
   }
 
   const editGame = () => {
-    if (game_name.trim() && image.trim() && discount.trim() && price.trim()) {
+    if (game_name.trim() && image.trim() && discount.trim() && price.trim() && company.trim()) {
 
-      const editGame = { id, game_name, image, discount, price };
+      const editGame = { id, game_name, image, discount, price, company };
       const options = { method: 'put', body: new URLSearchParams(editGame) };
 
       fetch("http://127.0.0.1:3000/editJogos", options)
@@ -78,42 +98,48 @@ const Add = () => {
           return res.json();
         })
         .then((json) => {
-          window.alert('Jogo Editado');
-                    location.reload();
+          editarGame();
+          // location.reload();
+          loadGame();
         })
 
       //setJogos([...jogos, newGame]);
 
       setGame_name('');
       setImage('');
+      setCompany('');
       setDiscount('');
       setPrice('');
       setId(null);
     }
   }
 
-  const deleteGame = async () => {
-    try {
-      const response = {req:body.id};
-      const options = {method: 'DELETE',
-        body: new URLSearchParams(response)
-      };
+  const deleteGame = async (id) => {
+    const options = {
+      method: 'DELETE',
+      body: new URLSearchParams({ id: id })
+    };
 
-      fetch(`http://127.0.0.1:3000/deleteJogos/${id}`, options);
-      if (!response.ok) {
-        throw new Error('Erro ao excluir o jogo');
-      }
-      
-      // Mensagem de sucesso
-      alert('Jogo excluído com sucesso');
-    } catch (error) {
-      console.error('Erro:', error);
-      alert('Erro ao excluir o jogo');
-    }
+    fetch(`http://127.0.0.1:3000/deleteJogos`, options)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Erro ao excluir o jogo');
+        }
+        return (res.json());
+      })
+      .then((json) => {
+        excludeGame();
+        //alert(json.message);
+        loadGame();
+      })
   }
 
+  
   return (
+    
     <>
+    
+    <ToastContainer />
       <form ref={form1} onSubmit={editOrnew}>
         <h1 className="center white poppins">Adicionar</h1>
         <input
@@ -121,6 +147,13 @@ const Add = () => {
           placeholder="Nome do Jogo"
           value={game_name}
           onChange={(e) => setGame_name(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Empresa"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
           required
         />
         <input
@@ -149,7 +182,7 @@ const Add = () => {
 
       <div className="games-container align-container-center">
         {jogos.map((jogo, index) => (
-          <Jogo key={index} id={jogo.id} game_name={jogo.game_name} price={jogo.price} discount={jogo.discount} image={jogo.image} deleteGame={ deleteGame } selectEdit={ selectEdit }/>
+          <Jogo key={index} id={jogo.id} game_name={jogo.game_name} price={jogo.price} discount={jogo.discount} image={jogo.image} company={jogo.company} deleteGame={deleteGame} selectEdit={selectEdit} />
         ))}
       </div>
     </>
