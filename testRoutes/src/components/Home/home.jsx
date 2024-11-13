@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <section className="main-section">
       <h3 className="slogan white size-5 mont-600 uppercase">
-        Entre no universo, onde aventuras ganham vidas - testear
+        Entre no universo, onde aventuras ganham vidas - testearasdasd
       </h3>
       <aside className="buttons-container-main-section flex-row align-container-center">
         <button className="white transition mont-500 size-1 pointer">
