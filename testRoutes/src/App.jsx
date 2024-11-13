@@ -26,14 +26,14 @@ export default function App() {
     <Router>
       <header className="header">
         <Link className="link poppins" to="/"><div className="pointer container-logo flex-row">
-          <img src="/src/assets/snoop-logo.svg"></img>
+          <img src="/src/assets/logo-Mercado.svg"></img>
         </div></Link>
 
         <nav className="nav-container flex-row align-container-center">
           <Link className="link poppins" to="/" >Início</Link>
-          <Link className="link poppins" to="/sellers">Mais Vendidos</Link>
+          <Link className="link poppins" to="/sellers">Categorias</Link>
           <Link className="link poppins" to="/ofertas">Ofertas</Link>
-          <Link className="link poppins" to="/avaliacoes">Avaliações</Link>
+          <Link className="link poppins" to="/avaliacoes">Contato</Link>
           <Link className="link poppins" to="/todos">Todos</Link>
           <button onClick= { showModal } className="btn-header-common align-container-center white uppercase poppins-600 flex-row pointer transition">
           Acessar <i class="uil uil-signin"></i> </button>
